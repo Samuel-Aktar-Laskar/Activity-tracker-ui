@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
-
 function Main() {
   const [show, setShow] = useState(false);
   const [hamb, setHamb] = useState(true);
@@ -17,6 +16,33 @@ function Main() {
     return store.activeBucket;
   });
   const [add, setAdd] = useState(false);
+
+  const dummyData = [
+    { type: "scroll", scrollTop: 227, scrollLeft: 0 },
+    { type: "click", x: 822, y: 274, xPath: "//*[@id='searchInput']" },
+    {
+      type: "typing",
+      xPath: "//*[@id='searchInput']",
+      text: "Hi, How are you?",
+    },
+    {
+      type: "click",
+      x: 1141,
+      y: 267,
+      xPath: "//*[@id='search-form']/fieldset[1]/button[1]/i[1]",
+    },
+    { type: "scroll", scrollTop: 2, scrollLeft: 0 },
+    { type: "scroll", scrollTop: 2023, scrollLeft: 0 },
+    {
+      type: "click",
+      x: 350,
+      y: 596,
+      xPath:
+        "//*[@id='mw-content-text']/div[2]/div[4]/ul[1]/1i[20]/div[1]/div[2]/div[1]/a[1]",
+    },
+    { type: "click", x: 1825, y: 124, xPath: "//*[@id='button3']" },
+  ];
+
   return (
     <div className="mt-[72px]  flex flex-col">
       <div className="flex  xl:hidden justify-between px-[30px] border-gray-400 border-b-[2px]">
@@ -44,7 +70,7 @@ function Main() {
         )}
       </div>
       <div>
-        <div className="hidden xl:block w-[20%] bg-[#f1f1f1] fixed p-0 m-0 h-[90%]">
+        {/* <div className="hidden xl:block w-[20%] bg-[#f1f1f1] fixed p-0 m-0 h-[90%]">
           <MainSidebar />
         </div>
         <div>
@@ -81,6 +107,36 @@ function Main() {
                 })}
               </div>
             )}
+          </div>
+        </div> */}
+        <div>
+          <div className=" p-5 text-xl font-bold">Activity Logs</div>
+          <div className="flex flex-col gap-4">
+            {dummyData.map((event, index) => (
+              <div className="mx-auto w-full p-5 border-b-2 border-gray-400" key={index}>
+                <h3 className="font-semibold">Event {index + 1}</h3>
+                <p>Type: {event.type}</p>
+                {event.type === "scroll" && (
+                  <>
+                    <p>Scroll Top: {event.scrollTop}</p>
+                    <p>Scroll Left: {event.scrollLeft}</p>
+                  </>
+                )}
+                {event.type === "click" && (
+                  <>
+                    <p>X: {event.x}</p>
+                    <p>Y: {event.y}</p>
+                    <p>XPath: {event.xPath}</p>
+                  </>
+                )}
+                {event.type === "typing" && (
+                  <>
+                    <p>XPath: {event.xPath}</p>
+                    <p>Text: {event.text}</p>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
