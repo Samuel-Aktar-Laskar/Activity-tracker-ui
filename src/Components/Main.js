@@ -153,6 +153,13 @@ function Main() {
                       <p className="text-sm">Text: {event.text}</p>
                     </div>
                   )}
+                  {event.type === 'assert' && (
+                    <div className="">
+                      <p className="text-sm">XPath : {event.xPath}</p>
+                      <p className="text-sm">x: {event.x}</p>
+                      <p className="text-sm">y: {event.y}</p>
+                      </div>
+                  )}
                 </div>
               ))}
             </div>
