@@ -15,7 +15,19 @@ function Main() {
   const { activeBucket, cards } = useSelector((store) => {
     return store.activeBucket;
   });
+
   const [add, setAdd] = useState(false);
+
+  const [data, setData] = useState([])
+  window.addEventListener('message',(event)=>{
+    console.log('Message received in web page ', event.data)
+    if (event.data && event.data.type === 'FROM_EXTENSION'){
+      const res = event.data.activities
+      setData(res)
+
+    }
+  })
+
 
   const dummyData = [
     { type: "scroll", scrollTop: 227, scrollLeft: 0 },
@@ -113,7 +125,7 @@ function Main() {
           <div className=" p-5 text-xl font-bold">Activity Logs</div>
           <div className="flex flex-col gap-4">
             <div className="p-4">
-              {dummyData.map((event, index) => (
+              {data.map((event, index) => (
                 <div
                   key={index}
                   className="mb-4 p-4 border border-gray-200 rounded-lg shadow-md"
