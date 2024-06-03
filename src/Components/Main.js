@@ -112,31 +112,38 @@ function Main() {
         <div>
           <div className=" p-5 text-xl font-bold">Activity Logs</div>
           <div className="flex flex-col gap-4">
-            {dummyData.map((event, index) => (
-              <div className="mx-auto w-full p-5 border-b-2 border-gray-400" key={index}>
-                <h3 className="font-semibold">Event {index + 1}</h3>
-                <p>Type: {event.type}</p>
-                {event.type === "scroll" && (
-                  <>
-                    <p>Scroll Top: {event.scrollTop}</p>
-                    <p>Scroll Left: {event.scrollLeft}</p>
-                  </>
-                )}
-                {event.type === "click" && (
-                  <>
-                    <p>X: {event.x}</p>
-                    <p>Y: {event.y}</p>
-                    <p>XPath: {event.xPath}</p>
-                  </>
-                )}
-                {event.type === "typing" && (
-                  <>
-                    <p>XPath: {event.xPath}</p>
-                    <p>Text: {event.text}</p>
-                  </>
-                )}
-              </div>
-            ))}
+            <div className="p-4">
+              {dummyData.map((event, index) => (
+                <div
+                  key={index}
+                  className="mb-4 p-4 border border-gray-200 rounded-lg shadow-md"
+                >
+                  <h3 className="text-lg font-semibold mb-2">
+                    Event {index + 1}
+                  </h3>
+                  <p className="text-sm text-gray-600 pb-2">Type: {event.type}</p>
+                  {event.type === "scroll" && (
+                    <div className="">
+                      <p className="text-sm">Scroll Top: {event.scrollTop}</p>
+                      <p className="text-sm">Scroll Left: {event.scrollLeft}</p>
+                    </div>
+                  )}
+                  {event.type === "click" && (
+                    <div className="">
+                      <p className="text-sm">X: {event.x}</p>
+                      <p className="text-sm">Y: {event.y}</p>
+                      <p className="text-sm">XPath: {event.xPath}</p>
+                    </div>
+                  )}
+                  {event.type === "typing" && (
+                    <div className="">
+                      <p className="text-sm">XPath: {event.xPath}</p>
+                      <p className="text-sm">Text: {event.text}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
