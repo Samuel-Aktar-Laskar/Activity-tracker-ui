@@ -11,6 +11,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import { createCard } from "../Redux/activeBucket/activeBucketAction";
 
 const Navbar = () => {
   const style = {
@@ -42,55 +44,67 @@ const Navbar = () => {
   };
 
   function sendMessageToExtension_replay(message) {
-    window.postMessage({ type: 'FROM_PAGE', payload: { type: message } }, '*');
+    window.postMessage({ type: "FROM_PAGE", payload: { type: message } }, "*");
   }
 
+  const replay = () => {
+    sendMessageToExtension_replay("start_replaying");
+  };
 
-  const replay=()=>{
-    sendMessageToExtension_replay('start_replaying')
-  }
-
-  const handleChange=(e)=>{
+  const handleChange = (e) => {
     e.preventDefault();
-    setUri(e.target.value)
-  }
+    setUri(e.target.value);
+  };
 
-  function RecordingInput() {
+  const [add, setAdd] = useState(false);
+
+  function AddURI() {
+    const saveHandler = (e) => {
+      callExtension();
+      setAdd(false);
+      setUri("");
+      e.preventDefault();
+    };
     return (
-      <div>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <div className="flex flex-col gap-2">
-              <div className="">Enter URI</div>
-             
-              <input
-                value={uri}
-                onChange={handleChange}
-                className="py-[4px] outline-none border-b-[1px] border-b-gray-400"
-                type="text"
-                placeholder="URI"
-                name="URI"
-              />
-              <button
+      <div className="w-[100%] h-[100%]">
+        <div className="flex  justify-center items-center h-[100%] w-[100%] md:w-[70%] mx-auto ">
+          <form
+            onSubmit={saveHandler}
+            className="gap-[20px] flex flex-col p-[20px] bg-white rounded-[10px] w-[80%] drop-shadow-lg border-[1px] border-gray-400 z-50"
+          >
+            <div className="flex text-center justify-between text-[18px] font-bold">
+              <span>Enter URI</span>
+              <span
+                className="cursor-pointer"
                 onClick={() => {
-                  handleClose();
-                  callExtension();
+                  setAdd(false);
                 }}
-                className="rounded-md px-3 py-[2px] text-[13px] sm:text-[17px]   font-bold  bg-[#ff4343]  text-white"
               >
-                Submit
-              </button>
+                <CloseOutlinedIcon />
+              </span>
             </div>
-          </Box>
-        </Modal>
+            <input
+              value={uri}
+              onChange={handleChange}
+              className="py-[4px] outline-none border-b-[1px] border-b-gray-400"
+              type="text"
+              placeholder="URI"
+              name="URI"
+            />
+
+            <button
+              type="submit"
+              className="rounded-md px-3 py-[3px] text-[18px] font-bold  bg-[#ff4343]  text-white"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
+
+  
 
   const { loader } = useSelector((store) => {
     return store.loader;
@@ -124,7 +138,7 @@ const Navbar = () => {
           {localStorage.getItem("token") !== null && (
             <button
               onClick={() => {
-                handleOpen();
+                setAdd(true);
               }}
               className="rounded-md px-3 py-[2px] text-[13px] sm:text-[17px]  font-bold  bg-[#ff4343]  text-white"
             >
@@ -132,7 +146,12 @@ const Navbar = () => {
             </button>
           )}
           {localStorage.getItem("token") !== null && (
-            <button onClick={()=>{replay()}} className="rounded-md px-3 py-[2px] text-[13px] sm:text-[17px]  font-bold  bg-[#ff4343]  text-white">
+            <button
+              onClick={() => {
+                replay();
+              }}
+              className="rounded-md px-3 py-[2px] text-[13px] sm:text-[17px]  font-bold  bg-[#ff4343]  text-white"
+            >
               Replay
             </button>
           )}
@@ -167,7 +186,11 @@ const Navbar = () => {
         </div>
       </div>
       <div>{loader && <LinearProgress color="primary" />}</div>
-      <RecordingInput />
+      {add && (
+        <div className="fixed top-0 left-0 w-[100%] h-[100%]  z-50 bg-[#535151a2]">
+          <AddURI setAdd={setAdd} />
+        </div>
+      )}
     </div>
   );
 };
