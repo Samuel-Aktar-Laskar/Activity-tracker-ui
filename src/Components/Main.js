@@ -1,7 +1,7 @@
 import React from "react";
-import MainSidebar from "./MainSidebar";
-import Card from "./Card";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+// import MainSidebar from "./MainSidebar";
+// import Card from "./Card";
+// import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import AddNewVideo from "./AddNewVideo";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -45,7 +45,7 @@ function Main() {
 
   return (
     <div className="mt-[72px]  flex flex-col">
-      <div className="flex  xl:hidden justify-between px-[30px] border-gray-400 border-b-[2px]">
+      {/* <div className="flex  xl:hidden justify-between px-[30px] border-gray-400 border-b-[2px]">
         {hamb && (
           <div
             className="text-[20px] font-bold py-[10px] cursor-pointer"
@@ -68,7 +68,7 @@ function Main() {
             <CloseOutlinedIcon />
           </div>
         )}
-      </div>
+      </div> */}
       <div>
         {/* <div className="hidden xl:block w-[20%] bg-[#f1f1f1] fixed p-0 m-0 h-[90%]">
           <MainSidebar />
