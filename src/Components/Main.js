@@ -128,119 +128,167 @@ function Main() {
                                     )}
                                 </div>
                             ))} */}
-                            {data.map((event, index) => (
-                                event.type ==="network" ? <div className="mb-6 p-6 border border-gray-200 rounded-lg bg-white">
-
-                                    <div>
-                                    {index+1}: Network Request  : <p className="text-gray-500">{event.url}</p>
+                            {data.map((event, index) =>
+                                event.type === "network" ? (
+                                    <div className="mb-6 p-6 border border-gray-200 rounded-lg bg-white">
+                                        <div>
+                                            {index + 1}: Network Request :{" "}
+                                            <p className="text-gray-500">
+                                                {event.url}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>:
-                                <div
-                                    key={index}
-                                    className="mb-6 p-6 border border-gray-200 rounded-lg shadow-lg bg-white"
-                                >
-                                    <h3 className="text-xl font-bold mb-4 text-blue-600">
-                                        {index + 1}:{" "}
-                                        {event.type.charAt(0).toUpperCase() +
-                                            event.type.slice(1)}{" "}
-                                        Event
-                                    </h3>
-                                    <p className="text-sm text-gray-600 mb-4">
-                                        <span className="font-semibold">
-                                            Type:
-                                        </span>{" "}
-                                        {event.type}
-                                    </p>
-                                    {event.type === "scroll" && (
-                                        <div className="text-gray-700">
-                                            <p className="text-sm mb-2">
-                                                <span className="font-semibold">
-                                                    Scroll Top:
-                                                </span>{" "}
-                                                {event.scrollTop}
-                                            </p>
-                                            <p className="text-sm">
-                                                <span className="font-semibold">
-                                                    Scroll Left:
-                                                </span>{" "}
-                                                {event.scrollLeft}
-                                            </p>
-                                        </div>
-                                    )}
-                                    {event.type === "click" && (
-                                        <div className="text-gray-700">
-                                            <p className="text-sm mb-2">
-                                                <span className="font-semibold">
-                                                    X:
-                                                </span>{" "}
-                                                {event.x}
-                                            </p>
-                                            <p className="text-sm mb-2">
-                                                <span className="font-semibold">
-                                                    Y:
-                                                </span>{" "}
-                                                {event.y}
-                                            </p>
-                                            <p className="text-sm mb-4">
-                                                <span className="font-semibold">
-                                                    XPath:
-                                                </span>{" "}
-                                                {event.xPath}
-                                            </p>
-                                            <img
-                                                src={event.screenshot}
-                                                alt="Click"
-                                                className="w-full h-[5rem] object-contain "
-                                                // className="w-full h-auto max-h-64 object-contain border border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    )}
-                                    {event.type === "typing" && (
-                                        <div className="text-gray-700">
-                                            <p className="text-sm mb-2">
-                                                <span className="font-semibold">
-                                                    XPath:
-                                                </span>{" "}
-                                                {event.xPath}
-                                            </p>
-                                            <p className="text-sm">
-                                                <span className="font-semibold">
-                                                    Text:
-                                                </span>{" "}
-                                                {event.text}
-                                            </p>
-                                        </div>
-                                    )}
-                                    {event.type === "assert" && (
-                                        <div className="text-gray-700">
-                                            <p className="text-sm mb-2">
-                                                <span className="font-semibold">
-                                                    XPath:
-                                                </span>{" "}
-                                                {event.xPath}
-                                            </p>
-                                            <p className="text-sm mb-2">
-                                                <span className="font-semibold">
-                                                    X:
-                                                </span>{" "}
-                                                {event.x}
-                                            </p>
-                                            <p className="text-sm mb-4">
-                                                <span className="font-semibold">
-                                                    Y:
-                                                </span>{" "}
-                                                {event.y}
-                                            </p>
-                                            <img
-                                                src={event.screenshot}
-                                                alt="Assert"
-                                                className="w-full h-[5rem] object-contain  "
-                                                // className="w-full h-auto max-h-64 object-contain border border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                ) : (
+                                    <div
+                                        key={index}
+                                        className="mb-6 p-6 border border-gray-200 rounded-lg shadow-lg bg-white"
+                                    >
+                                        <h3 className="text-xl font-bold mb-4 text-blue-600">
+                                            {index + 1}:{" "}
+                                            {event.type
+                                                .charAt(0)
+                                                .toUpperCase() +
+                                                event.type.slice(1)}{" "}
+                                            Event
+                                        </h3>
+                                        <p className="text-sm text-gray-600 mb-4">
+                                            <span className="font-semibold">
+                                                Type:
+                                            </span>{" "}
+                                            {event.type}
+                                        </p>
+                                        {event.type === "scroll" && (
+                                            <div className="text-gray-700">
+                                                <p className="text-sm mb-2">
+                                                    <span className="font-semibold">
+                                                        Scroll Top:
+                                                    </span>{" "}
+                                                    {event.scrollTop}
+                                                </p>
+                                                <p className="text-sm">
+                                                    <span className="font-semibold">
+                                                        Scroll Left:
+                                                    </span>{" "}
+                                                    {event.scrollLeft}
+                                                </p>
+                                            </div>
+                                        )}
+                                        {event.type === "click" && (
+                                            <div className="text-gray-700">
+                                                <p className="text-sm mb-2">
+                                                    <span className="font-semibold">
+                                                        X:
+                                                    </span>{" "}
+                                                    {event.x}
+                                                </p>
+                                                <p className="text-sm mb-2">
+                                                    <span className="font-semibold">
+                                                        Y:
+                                                    </span>{" "}
+                                                    {event.y}
+                                                </p>
+                                                <p className="text-sm mb-4">
+                                                    <span className="font-semibold">
+                                                        XPath:
+                                                    </span>{" "}
+                                                    {event.xPath}
+                                                </p>
+                                                <p className="text-sm mb-4">
+                                                    <span className="font-semibold">
+                                                        Other Properties:
+                                                    </span>{" "}
+                                                    {Object.keys(
+                                                        event.otherProperties
+                                                    ).map((key) => (
+                                                        <span key={key}>
+                                                            {/* Display key and value */}
+                                                            {key}:{" "}
+                                                            {
+                                                                event
+                                                                    .otherProperties[
+                                                                    key
+                                                                ]
+                                                            }{" "}
+                                                            <br />
+                                                        </span>
+                                                    ))}
+                                                </p>
+                                                <img
+                                                    src={event.screenshot}
+                                                    alt="Click"
+                                                    className="w-full h-[5rem] object-contain "
+                                                    // className="w-full h-auto max-h-64 object-contain border border-gray-300 rounded-md"
+                                                />
+                                            </div>
+                                        )}
+                                        {event.type === "typing" && (
+                                            <div className="text-gray-700">
+                                                <p className="text-sm mb-2">
+                                                    <span className="font-semibold">
+                                                        XPath:
+                                                    </span>{" "}
+                                                    {event.xPath}
+                                                </p>
+                                                <p className="text-sm">
+                                                    <span className="font-semibold">
+                                                        Text:
+                                                    </span>{" "}
+                                                    {event.text}
+                                                </p>
+                                            </div>
+                                        )}
+                                        {event.type === "assert" && (
+                                            <div className="text-gray-700">
+                                                <p className="text-sm mb-2">
+                                                    <span className="font-semibold">
+                                                        XPath:
+                                                    </span>{" "}
+                                                    {event.xPath}
+                                                </p>
+                                                <p className="text-sm mb-2">
+                                                    <span className="font-semibold">
+                                                        X:
+                                                    </span>{" "}
+                                                    {event.x}
+                                                </p>
+                                                <p className="text-sm mb-4">
+                                                    <span className="font-semibold">
+                                                        Y:
+                                                    </span>{" "}
+                                                    {event.y}
+                                                </p>
+                                                <p className="text-sm mb-4">
+                                                    <span className="font-semibold">
+                                                        Other Properties:
+                                                    </span>{" "}
+                                                    {Object.keys(
+                                                        event.otherProperties
+                                                    ).map((key) => (
+                                                        <span key={key}>
+                                                            {/* Display key and value */}
+                                                            {key}:{" "}
+                                                            {
+                                                                event
+                                                                    .otherProperties[
+                                                                    key
+                                                                ]
+                                                            }{" "}
+                                                            <br />
+                                                        </span>
+                                                    ))}
+                                                </p>
+
+                                                <img
+                                                    src={event.screenshot}
+                                                    alt="Assert"
+                                                    className="w-full h-[5rem] object-contain  "
+                                                    // className="w-full h-auto max-h-64 object-contain border border-gray-300 rounded-md"
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            )}
                         </div>
                     </div>
                 </div>
